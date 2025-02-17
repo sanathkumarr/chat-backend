@@ -11,7 +11,7 @@ const Message = require("./models/Message");
 
 const app = express();
 const server = http.createServer(app);
-
+app.use(express.json());
 // Enable CORS for frontend (Vercel domain)
 const corsOptions = {
   origin: "https://chat-frontend-xi-navy.vercel.app",  // Frontend URL
@@ -19,7 +19,7 @@ const corsOptions = {
   credentials: true,  // Enable cookies if needed
 };
 app.use(cors(corsOptions));
-app.use(express.json());
+
 
 connectDB();
 
@@ -27,7 +27,9 @@ const io = new Server(server, {
   cors: {
     origin: [ "https://chat-frontend-xi-navy.vercel.app/"],
     methods: ["GET", "POST"],
+    credentials: true,
   },
+  transports: ["websocket", "polling"],
 });
 
 const onlineUsers = {};
