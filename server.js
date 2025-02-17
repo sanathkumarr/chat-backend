@@ -12,7 +12,13 @@ const Message = require("./models/Message");
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors());
+// Enable CORS for frontend (Vercel domain)
+const corsOptions = {
+  origin: "https://chat-frontend-xi-navy.vercel.app",  // Frontend URL
+  methods: ["GET", "POST"],
+  credentials: true,  // Enable cookies if needed
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 connectDB();
