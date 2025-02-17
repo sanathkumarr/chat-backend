@@ -17,9 +17,11 @@ app.use(express.json());
 
 connectDB();
 
-// WebSocket Setup
 const io = new Server(server, {
-  cors: { origin: "http://localhost:3000", methods: ["GET", "POST"] },
+  cors: {
+    origin: [ "https://chat-frontend-xi-navy.vercel.app/"],
+    methods: ["GET", "POST"],
+  },
 });
 
 const onlineUsers = {};
